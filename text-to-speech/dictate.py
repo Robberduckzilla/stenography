@@ -67,6 +67,12 @@ try:
 except:
     silence_length = 1000
 
+print(f"""using:
+filename: {filename}
+split_on: {split_on}
+random: {random}
+silence_length: {silence_length}
+""")
 
 segments = get_segements_from_file(filename=filename, split_on=split_on, random=random)
 generate_wav(segments, silence_length)
