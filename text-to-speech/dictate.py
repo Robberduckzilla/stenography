@@ -13,8 +13,10 @@ def get_segements_from_file(filename='text.txt', split_on='sentences', random=Tr
         pass
     elif split_on == 'sentences':
         segments = list(chain(*[x.replace('\n','').split('.') for x in segments]))
+        segments = [x for x in segments if x]
     elif split_on == 'words':
         segments = list(chain(*[x.replace('\n','').split(' ') for x in segments]))
+        segments = [x for x in segments if x]
         # hack: merge short words like 'a' or 'it' with the following word
         # because the TTS model struggles with very short words on their own.
         segments_clone = []
