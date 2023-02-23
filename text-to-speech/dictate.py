@@ -37,7 +37,6 @@ def get_segements_from_file(filename='text.txt', split_on='sentences', random=Tr
 def generate_wav(segments, silence_length=1000):
     working = AudioSegment.silent(1)
     silence = AudioSegment.silent(silence_length)
-
     models=TTS.list_models()
     model_name=models[7]
     tts=TTS(model_name)
@@ -50,28 +49,24 @@ def generate_wav(segments, silence_length=1000):
     working.export('dictation.wav')
 
 
-arguments = sys.argv[1:]
+try:
+    filename=str(sys.argv[1])
+except:
+    filename = 'text.txt'
+try: 
+    split_on = sys.argv[2]
+except:
+    split_on = 'sentences'
 
-if arguments:
-    try:
-        filename=sys.argv[1]
-    except:
-        filename = 'text.txt'
-
-    try: 
-        split_on = sys.argv[2]
-    except:
-        split_on = 'sentences'
-    
-    try:
-        random = True if sys.argv[3] == 'random' else False
-    except:
-        random = True
-    try:        
-        silence_length = int(sys.argv[4])
-    except:
-        silence_length = 1000
+try:
+    random = True if sys.argv[3] == 'random' else False
+except:
+    random = True
+try:        
+    silence_length = int(sys.argv[4])
+except:
+    silence_length = 1000
 
 
-segments = get_segements_from_file(filename, split_on, random)
+segments = get_segements_from_file(filename=filename, split_on=split_on, random=random)
 generate_wav(segments, silence_length)
