@@ -29,7 +29,7 @@ def get_segements_from_file(filename='text.txt', split_on='sentences', random=Tr
                 segments_clone.append(' '.join(segments[i:i+2]))
                 skip = True
         segments = segments_clone
-        segments = [x+'.' for x in segments if not x.endswith(('.',',','?','!',':',';'))]        
+        segments = [x+'.' if x.endswith(('.',',','?','!',':',';')) else x for x in segments]        
     if random:
         shuffle(segments)
     return segments
