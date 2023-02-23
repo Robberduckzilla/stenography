@@ -42,7 +42,7 @@ def generate_wav(segments, silence_length=1000):
     tts=TTS(model_name)
 
     for segment in segments:
-        tts.tts_to_file(segment, file_path='temp.wav')
+        tts.tts_to_file(text=segment, file_path='temp.wav')
         single_segment=AudioSegment.from_wav('temp.wav')
         working = working + single_segment + silence
 
